@@ -6,7 +6,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Exception[] arrException = { new ArgumentException(), new FormatException(), new MyException("тест моего исключения"), new NotSupportedException(), new TimeoutException() };
+            Exception[] arrException = { new ArgumentException(), new FormatException(), new MyException("тест моего исключения для примера"), new NotSupportedException(), new TimeoutException() };
 
             foreach (Exception ex in arrException)
             {
