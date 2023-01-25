@@ -13,9 +13,9 @@ namespace Task2
             {
                 sortSurname.Read();
             }
-            catch (FormatException)
+            catch (FormatException ex)
             {
-                Console.WriteLine("Введено некорректное значение");
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -51,9 +51,11 @@ namespace Task2
             }
             Console.WriteLine("Введите последовательность сортировки: либо 1(от А до Я), либо 2(от Я до А)");
 
-            int numberSort = Int32.Parse(Console.ReadLine());
-
-            if (numberSort != 1 && numberSort != 2) throw new FormatException();
+            if (!int.TryParse(Console.ReadLine(), out int numberSort))
+            {
+                throw new MyException("Невозможно определить значение сортировки");
+            }
+            if (numberSort != 1 && numberSort != 2) throw new MyException("Введено не верное значение сортировки");
 
             SortSurnameEntered(numberSort, arrSurname);
         }
@@ -62,5 +64,11 @@ namespace Task2
         {
             SortSurnameEvent?.Invoke(numberSort, arrSurname);
         }
+    }
+
+    class MyException : FormatException
+    {
+        public MyException() { }
+        public MyException(string message) : base(message){ }
     }
 }
